@@ -4,7 +4,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
-
+import { User } from './users/entities/user.entity.js';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +20,7 @@ import { UsersModule } from './users/users.module.js';
         password: configService.get<string>('DB_PASSWORD', ''),
         database: configService.get<string>('DB_NAME', 'test'),
         autoLoadEntities: true,
+        entities: [User], // Add your User entity here
         synchronize: true,
       }),
       inject: [ConfigService],
